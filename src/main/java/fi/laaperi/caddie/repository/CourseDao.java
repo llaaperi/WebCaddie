@@ -6,7 +6,12 @@ import fi.laaperi.caddie.domain.Course;
 
 public interface CourseDao {
 
+	public void persist(Course course);
+	
+	
 	public long save(Course course);
+	
+	public long update(Course course);
 	
 	public void delete(Course course);
 	

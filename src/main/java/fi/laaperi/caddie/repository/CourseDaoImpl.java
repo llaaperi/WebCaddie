@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import fi.laaperi.caddie.HomeController;
+import fi.laaperi.caddie.controller.HomeController;
 import fi.laaperi.caddie.domain.Course;
 
 @Repository
@@ -31,12 +31,38 @@ public class CourseDaoImpl implements CourseDao {
 	}
 	
 	@Override
+	public void persist(Course course) {
+
+		Course existing = findById(course.getId());
+		if(existing != null){
+			update(course);
+		}else{
+			save(course);
+		}
+		logger.info("Course " + course.getName() + " persisted");
+	}
+	
+	@Override
 	public long save(Course course) {
+		logger.info("Saving course " + course.getName() + ", id " + course.getId());
+		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(course);
 		session.getTransaction().commit();
 		logger.info("Course " + course.getName() + " saved");
+		return course.getId();
+	}
+	
+	@Override
+	public long update(Course course) {
+		logger.info("Updating course " + course.getName() + ", id " + course.getId());
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(course);
+		session.getTransaction().commit();
+		logger.info("Course " + course.getName() + " updated");
 		return course.getId();
 	}
 

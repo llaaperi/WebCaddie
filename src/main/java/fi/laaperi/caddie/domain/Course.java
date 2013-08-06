@@ -9,7 +9,8 @@ import javax.persistence.Id;
 public class Course {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@org.hibernate.annotations.GenericGenerator(name="hilo-strategy", strategy = "hilo")
+	@GeneratedValue(generator = "hilo-strategy")
 	long id;
 	
 	String name;
@@ -24,6 +25,10 @@ public class Course {
 	
 	public long getId(){
 		return this.id;
+	}
+	
+	public void setId(long id){
+		this.id = id;
 	}
 	
 	public String getName(){

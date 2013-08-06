@@ -1,7 +1,5 @@
-package fi.laaperi.caddie;
+package fi.laaperi.caddie.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,65 +21,48 @@ import fi.laaperi.caddie.repository.CourseDaoImpl;
 @Controller
 public class CoursesController {
 
-private static final Logger logger = LoggerFactory.getLogger(CoursesController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CoursesController.class);
+	private CourseDao courseDao = new CourseDaoImpl();
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/courses", method = RequestMethod.GET)
 	public ModelAndView courses(Locale locale, Model model) {
-		
-		CourseDao dao = new CourseDaoImpl();
-		List<Course> courses = dao.list();
+		logger.info("List courses");
+		List<Course> courses = courseDao.list();
 		
 	    ModelAndView mv = new ModelAndView("courses");
 	    mv.addObject("courses", courses);
 	    return mv;
-		//return "courses";
 	}
 	
 	@RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
 	public String deleteCourse(@RequestParam("id")long id, Model model) {
-		logger.info("Deleting course " + id);
-
-		CourseDao dao = new CourseDaoImpl();
-		Course course = dao.findById(id);
-		logger.info("Deleting course " + course.getName());
-		
-		dao.delete(course);
-		
+		logger.info("Delete course " + id);
+		Course course = courseDao.findById(id);
+		courseDao.delete(course);
 		return "redirect:courses";
 	}
 	
-	@RequestMapping(value = "/addCourse", method = RequestMethod.POST)
-	public String addCourse(@ModelAttribute("courses")Course course, ModelMap model) {
-		logger.info("Adding course " + course.getName());
-		
-		model.addAttribute("name", course.getName());
-		model.addAttribute("par", course.getPar());
-		model.addAttribute("slope", course.getSlope());
-
-		CourseDao dao = new CourseDaoImpl();
-		dao.save(course);
-		
-		return "redirect:courses";
-	}
-	
-	@RequestMapping(value = "/course", method = RequestMethod.GET)
-	public ModelAndView course(Locale locale, Model model) {
-		
-		return new ModelAndView("course", "command", new Course());
-		//return "courses";
-	}
-	
-	@RequestMapping(value = "/openCourse", method = RequestMethod.GET)
+	@RequestMapping(value = "/viewCourse", method = RequestMethod.GET)
 	public ModelAndView openCourse(@RequestParam("id")long id, Model model) {
-		
-		CourseDao dao = new CourseDaoImpl();
-		Course course = dao.findById(id);
-		
+		logger.info("View course" + id);
+		Course course = courseDao.findById(id);
 		return new ModelAndView("course", "command", course);
-		//return "courses";
+	}
+	
+	@RequestMapping(value = "/newCourse", method = RequestMethod.GET)
+	public ModelAndView course(Locale locale, Model model) {
+		logger.info("New course");
+		return new ModelAndView("course", "command", new Course());
+	}
+	
+	@RequestMapping(value = "/saveCourse", method = RequestMethod.POST)
+	public String saveCourse(@ModelAttribute("courses")Course course, ModelMap model) {
+		logger.info("Save course");
+		courseDao.persist(course);
+		return "redirect:courses";
 	}
 	
 }

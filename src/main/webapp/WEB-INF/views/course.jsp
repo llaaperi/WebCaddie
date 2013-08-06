@@ -24,8 +24,9 @@ function closeSelf(){
 	Add new course
 </h1>
 
-<form:form name="courseForm" action="addCourse" method="POST" >
-   <table>
+<form:form name="courseForm" action="saveCourse" method="POST" >
+	<form:input type="hidden" path="id"/>
+	<table>
     <tr>
         <td><form:label path="name">Name</form:label></td>
         <td><form:input path="name" /></td>
@@ -40,10 +41,10 @@ function closeSelf(){
     </tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="Add course"/>
+            <input type="submit" value="Save course"/>
         </td>
     </tr>
-</table>  
+	</table>  
 </form:form>
 
 
