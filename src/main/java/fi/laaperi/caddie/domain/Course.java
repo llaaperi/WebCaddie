@@ -1,9 +1,17 @@
 package fi.laaperi.caddie.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 @Entity
 public class Course {
@@ -11,16 +19,21 @@ public class Course {
 	@Id
 	@org.hibernate.annotations.GenericGenerator(name="hilo-strategy", strategy = "hilo")
 	@GeneratedValue(generator = "hilo-strategy")
-	long id;
+	private long id;
 	
-	String name;
-	int par;
-	int slope;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="course")
+	private List<Hole> holes;
 	
-	public Course(){}
+	private String name;
+	private int par;
+	private int slope;
 	
-	public Course(String name){
-		this.name = name;
+	public Course(){
+		this.holes = new ArrayList<Hole>();
+		for(int i = 0; i < 18; i++){
+			Hole hole = new Hole();
+			this.addHole(hole);
+		}
 	}
 	
 	public long getId(){
@@ -53,6 +66,15 @@ public class Course {
 
 	public void setSlope(int slope) {
 		this.slope = slope;
+	}
+	
+	public List<Hole> getHoles(){
+		return this.holes;
+	}
+	
+	public void addHole(Hole hole) {
+		hole.setCourse(this);
+		this.holes.add(hole);
 	}
 	
 }

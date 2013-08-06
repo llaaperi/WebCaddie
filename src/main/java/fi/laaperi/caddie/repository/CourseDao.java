@@ -14,6 +14,7 @@ public interface CourseDao {
 	public long update(Course course);
 	
 	public void delete(Course course);
+	public void delete(long id);
 	
 	public List<Course> list();
 	

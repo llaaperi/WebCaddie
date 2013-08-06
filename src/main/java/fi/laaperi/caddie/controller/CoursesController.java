@@ -40,8 +40,9 @@ public class CoursesController {
 	@RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
 	public String deleteCourse(@RequestParam("id")long id, Model model) {
 		logger.info("Delete course " + id);
-		Course course = courseDao.findById(id);
-		courseDao.delete(course);
+		//Course course = courseDao.findById(id);
+		//courseDao.delete(course);
+		courseDao.delete(id);
 		return "redirect:courses";
 	}
 	

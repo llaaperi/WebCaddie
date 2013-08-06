@@ -49,6 +49,7 @@ public class CourseDaoImpl implements CourseDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(course);
+		session.flush();
 		session.getTransaction().commit();
 		logger.info("Course " + course.getName() + " saved");
 		return course.getId();
@@ -61,6 +62,7 @@ public class CourseDaoImpl implements CourseDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.update(course);
+		session.flush();
 		session.getTransaction().commit();
 		logger.info("Course " + course.getName() + " updated");
 		return course.getId();
@@ -72,6 +74,7 @@ public class CourseDaoImpl implements CourseDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		List<Course> courses = session.createCriteria(Course.class).list();
+		session.flush();
 		session.getTransaction().commit();
 		return courses;
 	}
@@ -81,6 +84,16 @@ public class CourseDaoImpl implements CourseDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(course);
+		session.flush();
+		session.getTransaction().commit();
+	}
+	@Override
+	public void delete(long id) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Course course = (Course)session.get(Course.class, id);
+		session.delete(course);
+		session.flush();
 		session.getTransaction().commit();
 	}
 	
@@ -90,6 +103,7 @@ public class CourseDaoImpl implements CourseDao {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		Course course = (Course)session.get(Course.class, id);
+		session.flush();
 		session.getTransaction().commit();
 		return course;
 	}
