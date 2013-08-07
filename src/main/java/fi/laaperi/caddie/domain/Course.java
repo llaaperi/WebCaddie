@@ -22,14 +22,13 @@ public class Course {
 	private long id;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="course")
-	private List<Hole> holes;
+	private List<Hole> holes = new ArrayList<Hole>();
 	
 	private String name;
 	private int par;
 	private int slope;
 	
 	public Course(){
-		this.holes = new ArrayList<Hole>();
 		for(int i = 0; i < 18; i++){
 			Hole hole = new Hole();
 			this.addHole(hole);
@@ -70,6 +69,13 @@ public class Course {
 	
 	public List<Hole> getHoles(){
 		return this.holes;
+	}
+	
+	public void addHoles(){
+		for(int i = 0; i < 18; i++){
+			Hole hole = new Hole();
+			this.addHole(hole);
+		}
 	}
 	
 	public void addHole(Hole hole) {

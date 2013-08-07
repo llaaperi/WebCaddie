@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false" %>
 <html>
@@ -24,7 +24,7 @@ function closeSelf(){
 	Add new course
 </h1>
 
-<form:form name="courseForm" action="saveCourse" method="POST" >
+<form:form modelAttribute="course" action="saveCourse" method="POST" >
 	<form:input type="hidden" path="id"/>
 	<table>
     <tr>
@@ -46,21 +46,24 @@ function closeSelf(){
     </tr>
 	</table>
 	
-	<table>
+	<table border="1">
 		<tr>
-			<th>1</th>
-			<th>2</th>
-			<th>3</th>
-			<th>4</th>
-			<th>5</th>
-			<th>6</th>
-			<th>7</th>
-			<th>8</th>
-			<th>9</th>
+			<th>Hole</th>
+			<c:forEach var="i" begin="1" end="18">
+				<c:if test="${i==10}">
+					<th>Out</th>
+				</c:if>
+				<th><c:out value="${i}"/></th>
+			</c:forEach>
 		</tr>
 		<tr>
-			<td>0</td>
-        	<td>0</td>
+			<th>Par</th>
+			<c:forEach items="${course.holes}" var="hole" varStatus="status">
+				<c:if test="${status.index==9}">
+					<td>sum</td>
+				</c:if>
+				<td><input name="holes[${status.index}].par" value="${hole.par}" maxlength="2" size="2"/></td>
+			</c:forEach>
 		</tr>
 	
 	</table>

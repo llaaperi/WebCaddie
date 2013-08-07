@@ -61,6 +61,7 @@ public class CourseDaoImpl implements CourseDao {
 		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		session.delete(course.getHoles());
 		session.update(course);
 		session.flush();
 		session.getTransaction().commit();

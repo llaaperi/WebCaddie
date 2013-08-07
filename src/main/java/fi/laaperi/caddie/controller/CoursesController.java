@@ -47,16 +47,16 @@ public class CoursesController {
 	}
 	
 	@RequestMapping(value = "/viewCourse", method = RequestMethod.GET)
-	public ModelAndView openCourse(@RequestParam("id")long id, Model model) {
-		logger.info("View course" + id);
+	public ModelAndView openCourse(@RequestParam("id")long id) {
+		logger.info("View course " + id);
 		Course course = courseDao.findById(id);
-		return new ModelAndView("course", "command", course);
+		return new ModelAndView("course", "course", course);
 	}
 	
 	@RequestMapping(value = "/newCourse", method = RequestMethod.GET)
-	public ModelAndView course(Locale locale, Model model) {
+	public ModelAndView course() {
 		logger.info("New course");
-		return new ModelAndView("course", "command", new Course());
+		return new ModelAndView("course", "course", new Course());
 	}
 	
 	@RequestMapping(value = "/saveCourse", method = RequestMethod.POST)
