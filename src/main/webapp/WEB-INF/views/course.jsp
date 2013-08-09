@@ -79,6 +79,17 @@ function closeSelf(){
 			</c:forEach>
 			<td>sum</td>
 		</tr>
+		<!-- HANDICAP -->
+		<tr>
+			<th>HCP</th>
+			<c:forEach items="${course.holes}" var="hole" varStatus="status">
+				<c:if test="${status.index==9}">
+					<td></td>
+				</c:if>
+				<td><input name="holes[${status.index}].hcp" value="${hole.hcp}" maxlength="2" size="2"/></td>
+			</c:forEach>
+			<td></td>
+		</tr>
 		<!-- PAR -->
 		<tr>
 			<th>Par</th>
