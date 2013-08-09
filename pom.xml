@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fi.laaperi</groupId>
 	<artifactId>WebCaddie</artifactId>
-	<name>Caddie</name>
+	<name>WebCaddie</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
