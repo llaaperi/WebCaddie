@@ -2,6 +2,8 @@ package fi.laaperi.caddie.repository;
 
 import java.util.List;
 
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -62,6 +64,12 @@ public class CourseDaoImpl implements CourseDao {
 		session.beginTransaction();
 		session.update(course);
 		session.flush();
+		
+		//Delete orphans
+		//(This if kind of a hack because Course's delete orphan should do this.)
+		Query query = session.createQuery("DELETE Hole WHERE course_id = null");
+		query.executeUpdate();
+		
 		session.getTransaction().commit();
 		logger.info("Course " + course.getName() + " updated");
 		return course.getId();
