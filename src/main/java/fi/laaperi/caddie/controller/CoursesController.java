@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fi.laaperi.caddie.domain.Course;
+import fi.laaperi.caddie.domain.Hole;
 import fi.laaperi.caddie.repository.CourseDao;
 import fi.laaperi.caddie.repository.CourseDaoImpl;
 
@@ -56,7 +57,12 @@ public class CoursesController {
 	@RequestMapping(value = "/newCourse", method = RequestMethod.GET)
 	public ModelAndView course() {
 		logger.info("New course");
-		return new ModelAndView("course", "course", new Course());
+		Course newCourse = new Course();
+		for(int i = 0; i < 18; i++){
+			Hole newHole = new Hole();
+			newCourse.addHole(newHole);
+		}
+		return new ModelAndView("course", "course", newCourse);
 	}
 	
 	@RequestMapping(value = "/saveCourse", method = RequestMethod.POST)

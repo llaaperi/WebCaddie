@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 @Entity
+@Table(name="Course")
 public class Course {
 	
 	@Id
@@ -21,18 +26,16 @@ public class Course {
 	@GeneratedValue(generator = "hilo-strategy")
 	private long id;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="course")
-	private List<Hole> holes = new ArrayList<Hole>();
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@IndexColumn(name="idx")
+	@JoinColumn(name="course_id")
+	List<Hole> holes = new ArrayList<Hole>();
 	
 	private String name;
 	private int par;
 	private int slope;
 	
 	public Course(){
-		for(int i = 0; i < 18; i++){
-			Hole hole = new Hole();
-			this.addHole(hole);
-		}
 	}
 	
 	public long getId(){
@@ -69,6 +72,7 @@ public class Course {
 	
 	public List<Hole> getHoles(){
 		return this.holes;
+		//return new ArrayList<Hole>();
 	}
 	
 	public void addHoles(){

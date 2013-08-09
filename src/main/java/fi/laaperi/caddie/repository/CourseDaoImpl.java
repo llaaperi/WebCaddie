@@ -58,10 +58,8 @@ public class CourseDaoImpl implements CourseDao {
 	@Override
 	public long update(Course course) {
 		logger.info("Updating course " + course.getName() + ", id " + course.getId());
-		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.delete(course.getHoles());
 		session.update(course);
 		session.flush();
 		session.getTransaction().commit();

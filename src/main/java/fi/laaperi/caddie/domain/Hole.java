@@ -1,12 +1,15 @@
 package fi.laaperi.caddie.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Hole")
 public class Hole {
 	
 	@Id
@@ -15,7 +18,7 @@ public class Hole {
 	private long id;
 	
 	@ManyToOne
-	private Course course;
+	Course course;
 	
 	private int par;
 	private int hcp;
