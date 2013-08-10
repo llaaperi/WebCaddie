@@ -36,5 +36,6 @@
     <!-- Names of the annotated entity classes -->
     <mapping class="fi.laaperi.caddie.domain.Course"/>
     <mapping class="fi.laaperi.caddie.domain.Hole"/>
+    <mapping class="fi.laaperi.caddie.domain.Round"/>
   </session-factory>
 </hibernate-configuration>

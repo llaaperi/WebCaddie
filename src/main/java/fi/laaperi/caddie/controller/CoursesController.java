@@ -66,7 +66,7 @@ public class CoursesController {
 	}
 	
 	@RequestMapping(value = "/saveCourse", method = RequestMethod.POST)
-	public String saveCourse(@ModelAttribute("courses")Course course, ModelMap model) {
+	public String saveCourse(@ModelAttribute("course")Course course, ModelMap model) {
 		logger.info("Save course");
 		courseDao.persist(course);
 		return "redirect:courses";
