@@ -1,6 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false" %>
+<script type="text/javascript">
+	
+function selectCourse(){
+	var courseId = document.getElementById("course").value;
+	//alert(courseId);
+	window.location = "newRound?courseId=" + courseId;
+}
+
+</script>
 <html>
 <head>
 	<title>Rounds</title>
@@ -11,7 +20,14 @@
 </h1>
 
 <!-- <a href="javascript:void(0)" onClick="popup();">Add new</a> -->
-<a href="newRound">Add new</a> 
+<c:out value="Add new round by selecting course: " />
+<select name="course" onchange="selectCourse()">
+	<option value="0" selected="selected">Select course</option>
+	<c:forEach items="${courses}" var="course">
+        <option value="${course.id}"><c:out value="${course.name}" /></option>
+    </c:forEach>
+</select>
+<!--<a href="<c:url value="newRound?courseId=${round.getId()}"/>">Add new</a>  -->
 
 <c:if test="${not empty rounds}">
     <table border="1">
@@ -29,6 +45,7 @@
                 <td>${round.getCourse().getName()}</td>
                 <td>${course.getScore()}</td>
                 <td>1</td>
+                <td><a href="<c:url value="deleteRound?id=${round.getId()}"/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

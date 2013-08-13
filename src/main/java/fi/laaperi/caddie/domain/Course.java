@@ -28,7 +28,6 @@ public class Course {
 	List<Hole> holes = new ArrayList<Hole>();
 	
 	private String name;
-	private int par;
 	private int slope;
 	
 	public Course(){
@@ -48,14 +47,6 @@ public class Course {
 	
 	public void setName(String name){
 		this.name = name;
-	}
-
-	public int getPar() {
-		return par;
-	}
-
-	public void setPar(int par) {
-		this.par = par;
 	}
 
 	public int getSlope() {
@@ -83,4 +74,100 @@ public class Course {
 		this.holes.add(hole);
 	}
 	
+	public int getLengthWhite(){
+		int sum = 0;
+		for(Hole hole : holes){
+			sum += hole.getLenWhite();
+		}
+		return sum;
+	}
+	
+	public int getLengthWhite9(){
+		int sum = 0;
+		for(int i = 0; i < 9; i++){
+			sum += holes.get(i).getLenWhite();
+		}
+		return sum;
+	}
+	
+	public int getLengthWhite18(){
+		int sum = 0;
+		for(int i = 9; i < 18; i++){
+			sum += holes.get(i).getLenWhite();
+		}
+		return sum;
+	}
+	
+	public int getLengthYellow(){
+		int sum = 0;
+		for(Hole hole : holes){
+			sum += hole.getLenYellow();
+		}
+		return sum;
+	}
+	
+	public int getLengthYellow9(){
+		int sum = 0;
+		for(int i = 0; i < 9; i++){
+			sum += holes.get(i).getLenYellow();
+		}
+		return sum;
+	}
+	
+	public int getLengthYellow18(){
+		int sum = 0;
+		for(int i = 9; i < 18; i++){
+			sum += holes.get(i).getLenYellow();
+		}
+		return sum;
+	}
+	
+	public int getLengthRed(){
+		int sum = 0;
+		for(Hole hole : holes){
+			sum += hole.getLenRed();
+		}
+		return sum;
+	}
+	
+	
+	public int getLengthRed9(){
+		int sum = 0;
+		for(int i = 0; i < 9; i++){
+			sum += holes.get(i).getLenRed();
+		}
+		return sum;
+	}
+	
+	public int getLengthRed18(){
+		int sum = 0;
+		for(int i = 9; i < 18; i++){
+			sum += holes.get(i).getLenRed();
+		}
+		return sum;
+	}
+	
+	public int getPar(){
+		int sum = 0;
+		for(Hole hole : holes){
+			sum += hole.getPar();
+		}
+		return sum;
+	}
+	
+	public int getPar9(){
+		int sum = 0;
+		for(int i = 0; i < 9; i++){
+			sum += holes.get(i).getPar();
+		}
+		return sum;
+	}
+	
+	public int getPar18(){
+		int sum = 0;
+		for(int i = 9; i < 18; i++){
+			sum += holes.get(i).getPar();
+		}
+		return sum;
+	}
 }

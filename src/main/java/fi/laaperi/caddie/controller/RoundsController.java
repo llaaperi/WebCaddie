@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import fi.laaperi.caddie.domain.Course;
 import fi.laaperi.caddie.domain.Hole;
 import fi.laaperi.caddie.domain.Round;
+import fi.laaperi.caddie.repository.CourseDao;
+import fi.laaperi.caddie.repository.CourseDaoImpl;
 import fi.laaperi.caddie.repository.RoundDao;
 import fi.laaperi.caddie.repository.RoundDaoImpl;
 import fi.laaperi.caddie.service.RoundManager;
@@ -36,6 +38,8 @@ public class RoundsController {
 		List<Round> rounds = roundManager.getRounds();
 	    ModelAndView mv = new ModelAndView("rounds");
 	    mv.addObject("rounds", rounds);
+	    CourseDao courseDao = new CourseDaoImpl();
+		mv.addObject("courses", courseDao.list());
 	    return mv;
 	}
 	
@@ -47,16 +51,36 @@ public class RoundsController {
 	}
 	
 	@RequestMapping(value = "/newRound", method = RequestMethod.GET)
-	public ModelAndView round() {
+	public ModelAndView round(@RequestParam("courseId")long id) {
 		logger.info("New round");
-		Round newRound = roundManager.createNew();
-		return new ModelAndView("round", "round", newRound);
+		
+		ModelAndView mv = new ModelAndView("round");
+		
+		CourseDao courseDao = new CourseDaoImpl();
+		Course course = courseDao.findById(id);
+		
+		Round newRound = roundManager.createNew(course);
+		mv.addObject("round", newRound);
+		
+		return mv;
 	}
 	
 	@RequestMapping(value = "/saveRound", method = RequestMethod.POST)
 	public String saveRound(@ModelAttribute("rounds")Round round, ModelMap model) {
-		logger.info("Save round");
+		logger.info("Save round at ");
+		CourseDao courseDao = new CourseDaoImpl();
+		Course course = courseDao.findById(round.getCourseId());
+		round.setCourse(course);
 		roundManager.saveRound(round);
+		return "redirect:rounds";
+	}
+	
+	@RequestMapping(value = "/deleteRound", method = RequestMethod.GET)
+	public String deleteCourse(@RequestParam("id")long id, Model model) {
+		logger.info("Delete round " + id);
+		//Course course = courseDao.findById(id);
+		//courseDao.delete(course);
+		roundManager.deleteRound(id);
 		return "redirect:rounds";
 	}
 }

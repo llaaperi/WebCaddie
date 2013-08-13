@@ -2,6 +2,7 @@ package fi.laaperi.caddie.repository;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -29,8 +30,13 @@ public class RoundDaoImpl implements RoundDao {
 	
 	@Override
 	public void persist(Round round) {
-		// TODO Auto-generated method stub
-
+		Round existing = findById(round.getId());
+		if(existing != null){
+			update(round);
+		}else{
+			save(round);
+		}
+		logger.info("Round " + round.getDateString() + " persisted");
 	}
 
 	@Override
@@ -47,20 +53,33 @@ public class RoundDaoImpl implements RoundDao {
 
 	@Override
 	public long update(Round round) {
-		// TODO Auto-generated method stub
-		return 0;
+		logger.info("Updating course " + round.getDateString() + ", id " + round.getId());
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(round);
+		session.flush();
+		session.getTransaction().commit();
+		logger.info("Course " + round.getDateString() + " updated");
+		return round.getId();
 	}
 
 	@Override
 	public void delete(Round round) {
-		// TODO Auto-generated method stub
-
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.delete(round);
+		session.flush();
+		session.getTransaction().commit();
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Round round = (Round)session.get(Round.class, id);
+		session.delete(round);
+		session.flush();
+		session.getTransaction().commit();
 	}
 
 	@Override

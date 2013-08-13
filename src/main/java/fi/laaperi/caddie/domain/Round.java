@@ -22,9 +22,23 @@ public class Round {
 	@OneToOne
 	Course course;
 	
-	int[] strokes;
+	long courseId;
+	
+	public long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(long courseId) {
+		this.courseId = courseId;
+	}
+
+	public int[] strokes = new int[18];
 	
 	public Round(){}
+	
+	public Round(Course course){
+		this.course = course;
+	}
 	
 	public long getId() {
 		return id;
