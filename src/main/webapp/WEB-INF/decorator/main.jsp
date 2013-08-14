@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,6 +14,21 @@
 		
 			<div id="header">
         		<H1>WebCaddie</H1>
+        		
+        		<!--
+        		<form id="login_form" method="post" action="<c:url value='j_spring_security_check'/>">
+      				<sec:authorize access="isAuthenticated()">
+       					<p>profile</p>
+       					<p>messages</p>
+      				</sec:authorize>
+      				<sec:authorize access="isAnonymous()">
+      				
+      				</sec:authorize>
+     			</form>
+     			 -->
+     			 <sec:authorize access="isAuthenticated()">
+     			 	You are logged in as <sec:authentication property="principal.username"/> 
+     			 </sec:authorize>
         		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
     		</div>
     		
