@@ -80,7 +80,7 @@ function updateSum(id){
 				<c:if test="${status.index==9}">
 					<td id="whiteSum9">&nbsp;</td>
 				</c:if>
-				<td><input id='white${status.index}' name="holes[${status.index}].lenWhite" value="${hole.lenWhite}" onChange='updateSum("white");' maxlength="3" size="3"/></td>
+				<td><input id='white${status.index}' name="holes[${status.index}].lenWhite" value="${hole.lenWhite}" onChange='updateSum("white");' maxlength="3" size="1"/></td>
 			</c:forEach>
 			<td id="whiteSum18">&nbsp;</td>
 			<td id="whiteSum">&nbsp;</td>
@@ -90,7 +90,7 @@ function updateSum(id){
 				<c:if test="${status.index==9}">
 					<td id="yellowSum9">&nbsp;</td>
 				</c:if>
-				<td><input id='yellow${status.index}' name="holes[${status.index}].lenYellow" value="${hole.lenYellow}" onChange='updateSum("yellow");' maxlength="3" size="3"/></td>
+				<td><input id='yellow${status.index}' name="holes[${status.index}].lenYellow" value="${hole.lenYellow}" onChange='updateSum("yellow");' maxlength="3" size="1"/></td>
 			</c:forEach>
 			<td id="yellowSum18">&nbsp;</td>
 			<td id="yellowSum">&nbsp;</td>
@@ -100,7 +100,7 @@ function updateSum(id){
 				<c:if test="${status.index==9}">
 					<td id="redSum9">&nbsp;</td>
 				</c:if>
-				<td><input id='red${status.index}' name='holes[${status.index}].lenRed' value='${hole.lenRed}' onChange='updateSum("red");' maxlength='3' size='3'/></td>
+				<td><input id='red${status.index}' name='holes[${status.index}].lenRed' value='${hole.lenRed}' onChange='updateSum("red");' maxlength='3' size='1'/></td>
 			</c:forEach>
 			<td id="redSum18">&nbsp;</td>
 			<td id="redSum">&nbsp;</td>
@@ -112,7 +112,7 @@ function updateSum(id){
 				<c:if test="${status.index==9}">
 					<td id="parSum9">&nbsp;</td>
 				</c:if>
-				<td><input id='par${status.index}' name='holes[${status.index}].par' value='${hole.par}' onChange='updateSum("par");' maxlength='2' size='2'/></td>
+				<td><input id='par${status.index}' name='holes[${status.index}].par' value='${hole.par}' onChange='updateSum("par");' maxlength='2' size='1'/></td>
 			</c:forEach>
 			<td id="parSum18">&nbsp;</td>
 			<td id="parSum">&nbsp;</td>
@@ -124,7 +124,7 @@ function updateSum(id){
 				<c:if test="${status.index==9}">
 					<td></td>
 				</c:if>
-				<td><input name='holes[${status.index}].hcp' value='${hole.hcp}' maxlength='2' size='2'/></td>
+				<td><input name='holes[${status.index}].hcp' value='${hole.hcp}' maxlength='2' size='1'/></td>
 			</c:forEach>
 			<td></td>
 		</tr>

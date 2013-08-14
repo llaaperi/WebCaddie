@@ -1,6 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false" %>
+<html>
+<head>
+	<title>Rounds</title>
+</head>
+<body>
+
 <script type="text/javascript">
 	
 function selectCourse(){
@@ -10,18 +16,14 @@ function selectCourse(){
 }
 
 </script>
-<html>
-<head>
-	<title>Rounds</title>
-</head>
-<body>
+
 <h1>
 	Rounds 
 </h1>
 
 <!-- <a href="javascript:void(0)" onClick="popup();">Add new</a> -->
 <c:out value="Add new round by selecting course: " />
-<select name="course" onchange="selectCourse()">
+<select name="course" onchange="selectCourse();">
 	<option value="0" selected="selected">Select course</option>
 	<c:forEach items="${courses}" var="course">
         <option value="${course.id}"><c:out value="${course.name}" /></option>
