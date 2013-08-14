@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,9 +13,11 @@
 		
 			<div id="header">
         		<H1>WebCaddie</H1>
+        		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
     		</div>
     		
     		<div id="navigation">
+    			<a class='navlink' href=".">Home</a>
         		<a class='navlink' href="courses">Courses</a>
         		<a class='navlink' href="rounds">Rounds</a>
     		</div>
