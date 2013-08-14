@@ -1,0 +1,53 @@
+html, body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: black;
+	background-color:white;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+
+h1 {
+	font-family: Helvetica, Geneva, Arial, SunSans-Regular, sans-serif
+}
+
+#container{
+	position:relative;
+	padding:0px;
+	height:100%;
+}
+#header{
+	padding:10px;
+	background-image:url('../images/grass.jpeg');
+	text-align:center;
+}
+#navigation{
+	padding:10px;
+	padding-left:100px;
+}
+#body{
+	padding:10px;
+}
+#footer{
+	position:absolute;
+	bottom:0;
+	padding:1ex;
+	width:100%;
+	background:#CCFFCC;
+	text-align:center;
+}
+
+.navlink{
+	display:inline-block;
+	width:9em;
+	height:2em;
+	background:#ccc;
+	color:#333;
+	line-height:2;
+	text-align:center;
+	text-decoration:none;
+	font-weight:900;
+}
+.navlink:hover{
+	color:#FFF;
+}
