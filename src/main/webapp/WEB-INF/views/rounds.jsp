@@ -23,7 +23,7 @@ function selectCourse(){
 
 <!-- <a href="javascript:void(0)" onClick="popup();">Add new</a> -->
 <c:out value="Add new round by selecting course: " />
-<select name="course" onchange="selectCourse();">
+<select id="course" onchange="selectCourse();">
 	<option value="0" selected="selected">Select course</option>
 	<c:forEach items="${courses}" var="course">
         <option value="${course.id}"><c:out value="${course.name}" /></option>
