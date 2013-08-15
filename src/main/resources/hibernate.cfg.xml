@@ -37,5 +37,7 @@
     <mapping class="fi.laaperi.caddie.domain.Course"/>
     <mapping class="fi.laaperi.caddie.domain.Hole"/>
     <mapping class="fi.laaperi.caddie.domain.Round"/>
+    <mapping class="fi.laaperi.caddie.domain.User"/>
+    <mapping class="fi.laaperi.caddie.domain.Role"/>
   </session-factory>
 </hibernate-configuration>
