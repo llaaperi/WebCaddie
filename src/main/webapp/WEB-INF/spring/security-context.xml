@@ -9,8 +9,8 @@
 	<http pattern="/resources/**" security="none"/>
     <http use-expressions="true">
         <intercept-url pattern="/" access="permitAll" />
-        <intercept-url pattern="/courses" access="permitAll" />
-        <intercept-url pattern="/rounds" access="isAuthenticated()" />
+        <intercept-url pattern="/courses/**" access="permitAll" />
+        <intercept-url pattern="/rounds/**" access="isAuthenticated()" />
         <intercept-url pattern="/**" access="denyAll" />
         <form-login />
         <logout/>

@@ -38,23 +38,14 @@ public class CoursesController {
 	    return mv;
 	}
 	
-	@RequestMapping(value = "/deleteCourse", method = RequestMethod.GET)
-	public String deleteCourse(@RequestParam("id")long id, Model model) {
-		logger.info("Delete course " + id);
-		//Course course = courseDao.findById(id);
-		//courseDao.delete(course);
-		courseDao.delete(id);
-		return "redirect:courses";
-	}
-	
-	@RequestMapping(value = "/viewCourse", method = RequestMethod.GET)
+	@RequestMapping(value = "/courses/viewCourse", method = RequestMethod.GET)
 	public ModelAndView openCourse(@RequestParam("id")long id) {
 		logger.info("View course " + id);
 		Course course = courseDao.findById(id);
 		return new ModelAndView("course", "course", course);
 	}
 	
-	@RequestMapping(value = "/newCourse", method = RequestMethod.GET)
+	@RequestMapping(value = "/courses/newCourse", method = RequestMethod.GET)
 	public ModelAndView course() {
 		logger.info("New course");
 		Course newCourse = new Course();
@@ -65,11 +56,17 @@ public class CoursesController {
 		return new ModelAndView("course", "course", newCourse);
 	}
 	
-	@RequestMapping(value = "/saveCourse", method = RequestMethod.POST)
+	@RequestMapping(value = "/courses/saveCourse", method = RequestMethod.POST)
 	public String saveCourse(@ModelAttribute("course")Course course, ModelMap model) {
 		logger.info("Save course");
 		courseDao.persist(course);
-		return "redirect:courses";
+		return "redirect:/courses";
 	}
 	
+	@RequestMapping(value = "/courses/deleteCourse", method = RequestMethod.GET)
+	public String deleteCourse(@RequestParam("id")long id, Model model) {
+		logger.info("Delete course " + id);
+		courseDao.delete(id);
+		return "redirect:/courses";
+	}
 }

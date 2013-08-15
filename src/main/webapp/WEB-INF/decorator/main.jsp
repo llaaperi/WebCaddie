@@ -4,8 +4,8 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><sitemesh:write property='title'/></title>
-        <link rel="stylesheet" type="text/css" href="resources/styles/style.css" />
-        <sitemesh:write property='head'/>  
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/styles/style.css" />
+        <sitemesh:write property='head'/>
 	</head>  
 	
 	<body>
@@ -28,9 +28,9 @@
     		</div>
     		
     		<div id="navigation">
-    			<a class='navlink' href=".">Home</a>
-        		<a class='navlink' href="courses">Courses</a>
-        		<a class='navlink' href="rounds">Rounds</a>
+    			<a class='navlink' href="${pageContext.request.contextPath}">Home</a>
+        		<a class='navlink' href="${pageContext.request.contextPath}/courses">Courses</a>
+        		<a class='navlink' href="${pageContext.request.contextPath}/rounds">Rounds</a>
     		</div>
     		
     		<div id="body">

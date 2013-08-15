@@ -12,7 +12,7 @@
 function selectCourse(){
 	var courseId = document.getElementById("course").value;
 	//alert(courseId);
-	window.location = "newRound?courseId=" + courseId;
+	window.location = "${pageContext.request.contextPath}/rounds/newRound?courseId=" + courseId;
 }
 
 </script>
@@ -43,11 +43,11 @@ function selectCourse(){
         <c:forEach var="round" items="${rounds}">
             <tr>
                 <td>${round.getId()}</td>
-                <td><a href="<c:url value="viewRound?id=${round.getId()}"/>">${round.getDateString()}</a></td>
+                <td><a href="<c:url value="/rounds/viewRound?id=${round.getId()}"/>">${round.getDateString()}</a></td>
                 <td>${round.getCourse().getName()}</td>
                 <td>${course.getScore()}</td>
                 <td>1</td>
-                <td><a href="<c:url value="deleteRound?id=${round.getId()}"/>">Delete</a></td>
+                <td><a href="<c:url value="/rounds/deleteRound?id=${round.getId()}"/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

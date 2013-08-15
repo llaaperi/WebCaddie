@@ -20,7 +20,7 @@ function popup(){
 </h1>
 
 <!-- <a href="javascript:void(0)" onClick="popup();">Add new</a> -->
-<a href="newCourse">Add new</a> 
+<a href="<c:url value="/courses/newCourse"/>">Add new</a> 
 
 <c:if test="${not empty courses}">
     <table border="1">
@@ -33,10 +33,10 @@ function popup(){
         <c:forEach var="course" items="${courses}">
             <tr>
                 <td>${course.getId()}</td>
-                <td><a href="<c:url value="viewCourse?id=${course.getId()}"/>">${course.getName()}</a></td>
+                <td><a href="<c:url value="/courses/viewCourse?id=${course.getId()}"/>">${course.getName()}</a></td>
                 <td>${course.getPar()}</td>
                 <td>${course.getSlope()}</td>
-                <td><a href="<c:url value="deleteCourse?id=${course.getId()}"/>">Delete</a></td>
+                <td><a href="<c:url value="/courses/deleteCourse?id=${course.getId()}"/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

@@ -43,14 +43,14 @@ public class RoundsController {
 	    return mv;
 	}
 	
-	@RequestMapping(value = "/viewRound", method = RequestMethod.GET)
+	@RequestMapping(value = "/rounds/viewRound", method = RequestMethod.GET)
 	public ModelAndView openRound(@RequestParam("id")long id) {
 		logger.info("View round " + id);
 		Round round = roundManager.getRound(id);
 		return new ModelAndView("round", "round", round);
 	}
 	
-	@RequestMapping(value = "/newRound", method = RequestMethod.GET)
+	@RequestMapping(value = "/rounds/newRound", method = RequestMethod.GET)
 	public ModelAndView round(@RequestParam("courseId")long id) {
 		logger.info("New round");
 		
@@ -65,22 +65,20 @@ public class RoundsController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/saveRound", method = RequestMethod.POST)
+	@RequestMapping(value = "/rounds/saveRound", method = RequestMethod.POST)
 	public String saveRound(@ModelAttribute("rounds")Round round, ModelMap model) {
 		logger.info("Save round at ");
 		CourseDao courseDao = new CourseDaoImpl();
 		Course course = courseDao.findById(round.getCourseId());
 		round.setCourse(course);
 		roundManager.saveRound(round);
-		return "redirect:rounds";
+		return "redirect:/rounds";
 	}
 	
-	@RequestMapping(value = "/deleteRound", method = RequestMethod.GET)
+	@RequestMapping(value = "/rounds/deleteRound", method = RequestMethod.GET)
 	public String deleteCourse(@RequestParam("id")long id, Model model) {
 		logger.info("Delete round " + id);
-		//Course course = courseDao.findById(id);
-		//courseDao.delete(course);
 		roundManager.deleteRound(id);
-		return "redirect:rounds";
+		return "redirect:/rounds";
 	}
 }
