@@ -40,7 +40,7 @@
 	    	<div id="footer">
 	        	Copyright 2013 Lauri Laaperi - All Rights Reserved
 	    	</div>
-
+	    	
 		</div>
 	</body>
 </html> 
