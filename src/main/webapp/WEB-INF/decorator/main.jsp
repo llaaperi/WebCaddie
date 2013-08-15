@@ -15,21 +15,16 @@
 			<div id="header">
         		<H1>WebCaddie</H1>
         		
-        		<!--
-        		<form id="login_form" method="post" action="<c:url value='j_spring_security_check'/>">
-      				<sec:authorize access="isAuthenticated()">
-       					<p>profile</p>
-       					<p>messages</p>
-      				</sec:authorize>
-      				<sec:authorize access="isAnonymous()">
-      				
-      				</sec:authorize>
-     			</form>
-     			 -->
-     			 <sec:authorize access="isAuthenticated()">
-     			 	You are logged in as <sec:authentication property="principal.username"/> 
-     			 </sec:authorize>
-        		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
+				<sec:authorize var="loggedIn" access="isAuthenticated()" />
+				<c:choose>
+					<c:when test="${loggedIn}">
+						You are logged in as <sec:authentication property="principal.username"/>
+     			 		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value="spring_security_login"/>">Login</a>
+					</c:otherwise>
+				</c:choose>
     		</div>
     		
     		<div id="navigation">
