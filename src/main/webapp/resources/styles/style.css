@@ -1,38 +1,62 @@
-html, body {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	color: black;
-	background-image:url('../images/grass_bg.png');
+html, body{
+	margin:0;
+	padding:0;
+	margin-left:10;
+	margin-right:10;
 	height:100%;
-}
-
-h1 {
-	font-family: Helvetica, Geneva, Arial, SunSans-Regular, sans-serif
+	background-image:url('../images/grass_bg.png');
+	font-family:sans-serif;
 }
 
 #container{
-	position:relative;
-	padding:0px;
+	height:auto !important;
+	min-height:100%;
 	height:100%;
-	background-color:white;
+	position:relative;
+	margin:0 auto;
+	background:white;
 }
+
+/*#header, #title, #login, #navigation, #content, #footer{border: 1px dashed red;}*/
+
 #header{
-	padding:10px;
+	width:100%;
+	height:100px;
 	background-image:url('../images/grass.jpeg');
-	text-align:center;
 }
+
+#title{
+	float:left;
+	padding:10px;
+	padding-left:30px;
+}
+
+#login{
+	float:right;
+	padding:10px;
+}
+
 #navigation{
 	padding:10px;
-	padding-left:100px;
+	background:#333;
 }
-#body{
-	padding:10px;
+#content{
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:40px;
 }
+
 #footer{
 	position:absolute;
-	bottom:0;
-	padding:1ex;
+	bottom:0px;
+	left:0px;
 	width:100%;
+	height:40px;
+	background:#333;
+	color:#999;
 	text-align:center;
+	vertical-align:middle;
+	line-height:40px;
 }
 
 .navlink{

@@ -13,18 +13,23 @@
 		<div id='container'>
 		
 			<div id="header">
-        		<H1>WebCaddie</H1>
+			
+				<div id="title">
+					<H1>WebCaddie</H1>
+				</div>
         		
-				<sec:authorize var="loggedIn" access="isAuthenticated()" />
-				<c:choose>
-					<c:when test="${loggedIn}">
-						You are logged in as <sec:authentication property="principal.username"/>
-     			 		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
-					</c:when>
-					<c:otherwise>
-						<a href="<c:url value="spring_security_login"/>">Login</a>
-					</c:otherwise>
-				</c:choose>
+        		<div id="login">
+					<sec:authorize var="loggedIn" access="isAuthenticated()" />
+					<c:choose>
+						<c:when test="${loggedIn}">
+							You are logged in as <sec:authentication property="principal.username"/>
+	     			 		<a href="<c:url value="j_spring_security_logout"/>">Logout</a>
+						</c:when>
+						<c:otherwise>
+							<a href="<c:url value="spring_security_login"/>">Login</a>
+						</c:otherwise>
+					</c:choose>
+				</div>
     		</div>
     		
     		<div id="navigation">
@@ -33,7 +38,7 @@
         		<a class='navlink' href="${pageContext.request.contextPath}/rounds">Rounds</a>
     		</div>
     		
-    		<div id="body">
+    		<div id="content">
     			<sitemesh:write property='body'/>
     		</div>
     		
