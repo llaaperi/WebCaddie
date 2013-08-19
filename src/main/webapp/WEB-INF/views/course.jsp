@@ -4,45 +4,9 @@
 <html>
 <head>
 	<title>Course</title>
-<script type="text/javascript">
-
-/*
-function closeSelf(){
-    
-	boolean valid = false;
-    if(valid){
-       alert("Adding new course");
-       document.forms['courseForm'].submit();
-       self.close();
-    }else{
-       alert("Invalid form");
-    }
-}
-*/
-function updateAll(){
-	updateSum("white");
-	updateSum("yellow");
-	updateSum("red");
-	updateSum("par");
-}
-function updateSum(id){
-	var sum = 0;
-	var sum9 = 0;
-	for(var i = 0; i < 18; i++){
-		sum += Number(document.getElementById(id+i).value);
-		if(i==8){
-			document.getElementById(id+"Sum9").innerHTML = sum;
-			sum9 = sum;
-		}
-	}
-	document.getElementById(id+"Sum18").innerHTML = sum - sum9;
-	document.getElementById(id+"Sum").innerHTML = sum;
-}
-</script>
-
 </head>
-<!-- <sitemesh:getProperty property='body.onload'/>  -->
-<body onload="updateAll();">
+
+<body>
 <h1>
 	Add new course
 </h1>
@@ -134,6 +98,44 @@ function updateSum(id){
 	<input type="submit" value="Save course"/>
 </form:form>
 
+<script type="text/javascript">
+
+/*
+function closeSelf(){
+    
+	boolean valid = false;
+    if(valid){
+       alert("Adding new course");
+       document.forms['courseForm'].submit();
+       self.close();
+    }else{
+       alert("Invalid form");
+    }
+}
+*/
+
+document.body.onload=updateAll();
+function updateAll(){
+	updateSum("white");
+	updateSum("yellow");
+	updateSum("red");
+	updateSum("par");
+}
+function updateSum(id){
+	var sum = 0;
+	var sum9 = 0;
+	for(var i = 0; i < 18; i++){
+		sum += Number(document.getElementById(id+i).value);
+		if(i==8){
+			document.getElementById(id+"Sum9").innerHTML = sum;
+			sum9 = sum;
+		}
+	}
+	document.getElementById(id+"Sum18").innerHTML = sum - sum9;
+	document.getElementById(id+"Sum").innerHTML = sum;
+}
+</script>
 
 </body>
+
 </html>
