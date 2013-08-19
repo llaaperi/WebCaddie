@@ -27,6 +27,7 @@
 						</c:when>
 						<c:otherwise>
 							<a href="<c:url value="/user-login"/>">Login</a>
+							<a href="<c:url value="/user-register"/>">Register</a>
 						</c:otherwise>
 					</c:choose>
 				</div>

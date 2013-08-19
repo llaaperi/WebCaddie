@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller 
-public class LoginController {
+public class AccountController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
+	@RequestMapping(value="/user-register", method=RequestMethod.GET)
+	public ModelAndView registerForm() {
+		logger.info("user-register");
+		return new ModelAndView("login");
+	}
 	
 	@RequestMapping(value="/user-login", method=RequestMethod.GET)
 	public ModelAndView loginForm() {

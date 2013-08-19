@@ -41,6 +41,7 @@ function updateSum(id){
 </script>
 
 </head>
+<!-- <sitemesh:getProperty property='body.onload'/>  -->
 <body onload="updateAll();">
 <h1>
 	Add new course
