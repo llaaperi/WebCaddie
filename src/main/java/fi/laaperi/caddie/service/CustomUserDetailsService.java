@@ -26,7 +26,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
-	//@Autowired  
     private UserDao userDAO = new UserDaoImpl();
 	
 	@Override
@@ -35,6 +34,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		fi.laaperi.caddie.domain.User domainUser = userDAO.getUser(login);  
         
+		if(domainUser == null){
+			logger.info("Not found");
+		}
+		
 		logger.info("Loaded user " + domainUser.getLogin());
 		
         boolean enabled = true;  

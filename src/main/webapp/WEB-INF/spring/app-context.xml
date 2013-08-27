@@ -20,4 +20,6 @@
 	
 	<bean id="customUserDetailsService" class="fi.laaperi.caddie.service.CustomUserDetailsService"/>
 
+	<bean id="userDao" class="fi.laaperi.caddie.repository.UserDaoImpl"/>
+
 </beans>

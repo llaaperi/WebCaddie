@@ -9,6 +9,7 @@ import java.util.List;
 
 
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -50,15 +51,16 @@ public class UserDaoImpl implements UserDao {
 		logger.info("Get user " + login);
 		
 		List<User> userList = new ArrayList<User>();  
-		
-		//Query query = openSession().createQuery("FROM user u WHERE u.login = :login");  
-		//query.setParameter("login", login);  
-		//userList = query.list(); 
-		
-		Session session = sessionFactory.openSession();
+		Session session = openSession();
 		session.beginTransaction();
-		userList = session.createCriteria(User.class).list();
-		session.flush();
+		
+		try{
+			String hql = "FROM User U WHERE U.login = :login";
+			userList = session.createQuery(hql).setParameter("login", login).list();
+		}catch(HibernateException e){
+			logger.info(e.getMessage());
+		}
+		
 		session.getTransaction().commit();
 		
 		if (userList.size() > 0){

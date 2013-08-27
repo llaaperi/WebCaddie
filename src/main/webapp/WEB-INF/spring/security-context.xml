@@ -11,6 +11,8 @@
         <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/user-login" access="permitAll" />
         <intercept-url pattern="/error-login" access="permitAll" />
+        <intercept-url pattern="/user-register" access="permitAll" />
+        <intercept-url pattern="/user-save" access="permitAll" />
         <intercept-url pattern="/courses/**" access="permitAll" />
         <intercept-url pattern="/rounds/**" access="isAuthenticated()" />
         <intercept-url pattern="/**" access="denyAll" />

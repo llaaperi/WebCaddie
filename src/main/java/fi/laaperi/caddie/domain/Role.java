@@ -15,6 +15,9 @@ import javax.persistence.Table;
 @Table(name="roles")
 public class Role {
 	
+	public final String ROLE_ADMIN = "ROLE_ADMIN";
+	public final String ROLE_USER = "ROLE_USER";
+	
 	@Id
 	@GeneratedValue
 	private int id;

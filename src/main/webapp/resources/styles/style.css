@@ -8,7 +8,7 @@ html, body{
 	font-family:sans-serif;
 }
 
-#container{
+#container_div{
 	height:auto !important;
 	min-height:100%;
 	height:100%;
@@ -19,34 +19,34 @@ html, body{
 
 /*#header, #title, #login, #navigation, #content, #footer{border: 1px dashed red;}*/
 
-#header{
+#header_div{
 	width:100%;
 	height:100px;
 	background-image:url('../images/grass.jpeg');
 }
 
-#title{
+#title_div{
 	float:left;
 	padding:10px;
 	padding-left:30px;
 }
 
-#login{
+#login_div{
 	float:right;
 	padding:10px;
 }
 
-#navigation{
+#navigation_div{
 	padding:10px;
 	background:#333;
 }
-#content{
+#content_div{
 	padding-left:10px;
 	padding-right:10px;
 	padding-bottom:40px;
 }
 
-#footer{
+#footer_div{
 	position:absolute;
 	bottom:0px;
 	left:0px;

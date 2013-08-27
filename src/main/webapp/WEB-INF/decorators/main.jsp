@@ -10,15 +10,15 @@
 	
 	<body>
 		
-		<div id='container'>
+		<div id='container_div'>
 		
-			<div id="header">
+			<div id="header_div">
 			
-				<div id="title">
+				<div id="title_div">
 					<H1>WebCaddie</H1>
 				</div>
         		
-        		<div id="login">
+        		<div id="login_div">
 					<sec:authorize var="loggedIn" access="isAuthenticated()" />
 					<c:choose>
 						<c:when test="${loggedIn}">
@@ -33,17 +33,17 @@
 				</div>
     		</div>
     		
-    		<div id="navigation">
+    		<div id="navigation_div">
     			<a class='navlink' href="${pageContext.request.contextPath}">Home</a>
         		<a class='navlink' href="${pageContext.request.contextPath}/courses">Courses</a>
         		<a class='navlink' href="${pageContext.request.contextPath}/rounds">Rounds</a>
     		</div>
     		
-    		<div id="content">
+    		<div id="content_div">
     			<sitemesh:write property='body'/>
     		</div>
     		
-	    	<div id="footer">
+	    	<div id="footer_div">
 	        	Copyright 2013 Lauri Laaperi - All Rights Reserved
 	    	</div>
 	    	
