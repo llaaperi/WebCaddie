@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import fi.laaperi.caddie.domain.Role;
 import fi.laaperi.caddie.repository.RoleDao;
 
-@Service
+@Service("roleService")
 @Transactional
 public class RoleServiceImpl implements RoleService {
 	
-	//@Autowired
+	@Autowired
     private RoleDao roleDAO;
 	
     /* (non-Javadoc)
