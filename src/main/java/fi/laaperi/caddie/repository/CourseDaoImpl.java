@@ -16,11 +16,12 @@ import org.springframework.stereotype.Repository;
 import fi.laaperi.caddie.controller.HomeController;
 import fi.laaperi.caddie.domain.Course;
 
-@Repository
+@Repository("courseDao")
 @Scope(value="singleton")
 public class CourseDaoImpl implements CourseDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CourseDaoImpl.class);
+	
 	private SessionFactory sessionFactory;
 	
 	public CourseDaoImpl(){

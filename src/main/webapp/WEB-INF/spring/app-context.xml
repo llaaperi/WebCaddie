@@ -16,10 +16,6 @@
 			http://www.springframework.org/schema/tx 
 			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd" >
 	
-	
-	
-	<bean id="customUserDetailsService" class="fi.laaperi.caddie.service.CustomUserDetailsService"/>
-
-	<bean id="userDao" class="fi.laaperi.caddie.repository.UserDaoImpl"/>
+	<context:component-scan base-package="fi.laaperi.caddie" />
 
 </beans>

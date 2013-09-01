@@ -3,11 +3,13 @@ package fi.laaperi.caddie.repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import fi.laaperi.caddie.domain.Role;
 
-@Repository
+@Repository("roleDao")
+@Scope(value="singleton")
 public class RoleDaoImpl implements RoleDao {
 	
 	//@Autowired 

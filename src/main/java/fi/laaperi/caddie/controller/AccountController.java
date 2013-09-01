@@ -2,6 +2,7 @@ package fi.laaperi.caddie.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,11 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fi.laaperi.caddie.domain.Course;
 import fi.laaperi.caddie.domain.User;
+import fi.laaperi.caddie.service.UserService;
 
 @Controller 
 public class AccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value="/user-login", method=RequestMethod.GET)
 	public ModelAndView loginForm() {
@@ -43,9 +48,9 @@ public class AccountController {
 	
 	@RequestMapping(value="/user-save", method=RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute("user")User user, ModelMap model) {
+		logger.info("Register user " + user.getLogin());
 		
-		logger.info("Creating user " + user.getLogin());
-		
+		userService.saveUser(user);
 		return new ModelAndView("home");
 	}
 	

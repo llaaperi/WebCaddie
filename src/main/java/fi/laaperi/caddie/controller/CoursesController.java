@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,12 +19,15 @@ import fi.laaperi.caddie.domain.Course;
 import fi.laaperi.caddie.domain.Hole;
 import fi.laaperi.caddie.repository.CourseDao;
 import fi.laaperi.caddie.repository.CourseDaoImpl;
+import fi.laaperi.caddie.service.CourseService;
 
 @Controller
 public class CoursesController {
 
 	private static final Logger logger = LoggerFactory.getLogger(CoursesController.class);
-	private CourseDao courseDao = new CourseDaoImpl();
+	
+	@Autowired
+	CourseService courseService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -31,7 +35,7 @@ public class CoursesController {
 	@RequestMapping(value = "/courses", method = RequestMethod.GET)
 	public ModelAndView courses(Locale locale, Model model) {
 		logger.info("List courses");
-		List<Course> courses = courseDao.list();
+		List<Course> courses = courseService.getCourses();
 		
 	    ModelAndView mv = new ModelAndView("courses");
 	    mv.addObject("courses", courses);
@@ -41,7 +45,7 @@ public class CoursesController {
 	@RequestMapping(value = "/courses/viewCourse", method = RequestMethod.GET)
 	public ModelAndView openCourse(@RequestParam("id")long id) {
 		logger.info("View course " + id);
-		Course course = courseDao.findById(id);
+		Course course = courseService.getCourse(id);
 		return new ModelAndView("course", "course", course);
 	}
 	
@@ -59,14 +63,14 @@ public class CoursesController {
 	@RequestMapping(value = "/courses/saveCourse", method = RequestMethod.POST)
 	public String saveCourse(@ModelAttribute("course")Course course, ModelMap model) {
 		logger.info("Save course");
-		courseDao.persist(course);
+		courseService.saveCourse(course);
 		return "redirect:/courses";
 	}
 	
 	@RequestMapping(value = "/courses/deleteCourse", method = RequestMethod.GET)
 	public String deleteCourse(@RequestParam("id")long id, Model model) {
 		logger.info("Delete course " + id);
-		courseDao.delete(id);
+		courseService.deleteCourse(id);
 		return "redirect:/courses";
 	}
 }

@@ -20,19 +20,24 @@ import fi.laaperi.caddie.controller.HomeController;
 import fi.laaperi.caddie.repository.UserDao;
 import fi.laaperi.caddie.repository.UserDaoImpl;
 
-@Service
+@Service("customUserDetailsService")
 @Transactional(readOnly=true)
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
-    private UserDao userDAO = new UserDaoImpl();
+	@Autowired
+    private UserDao userDao;
 	
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		logger.info("Load user " + login);
 		
-		fi.laaperi.caddie.domain.User domainUser = userDAO.getUser(login);  
+		if(userDao == null){
+			logger.info("UserDao is null");
+		}
+		
+		fi.laaperi.caddie.domain.User domainUser = userDao.getUser(login);  
         
 		if(domainUser == null){
 			logger.info("Not found");

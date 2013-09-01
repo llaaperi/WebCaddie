@@ -9,14 +9,19 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import fi.laaperi.caddie.controller.HomeController;
 import fi.laaperi.caddie.domain.Course;
 import fi.laaperi.caddie.domain.Round;
 
+@Repository("roundDao")
+@Scope(value="singleton")
 public class RoundDaoImpl implements RoundDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RoundDaoImpl.class);
+	
 	private SessionFactory sessionFactory;
 	
 	public RoundDaoImpl(){
