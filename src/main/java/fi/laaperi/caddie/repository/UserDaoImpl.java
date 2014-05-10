@@ -3,29 +3,16 @@ package fi.laaperi.caddie.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
-
-
-
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import fi.laaperi.caddie.domain.Course;
-import fi.laaperi.caddie.domain.Round;
 import fi.laaperi.caddie.domain.User;
-import fi.laaperi.caddie.service.CustomUserDetailsService;
 
 @Repository("userDao")
 @Scope(value="singleton")
@@ -33,29 +20,52 @@ public class UserDaoImpl implements UserDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 	
-	//@Autowired 
-	private SessionFactory sessionFactory;  
-
-	public UserDaoImpl(){
-		Configuration configuration = new Configuration();
-		configuration.configure();
-		ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder().applySettings(configuration
-                .getProperties());
-		sessionFactory = configuration.buildSessionFactory(serviceRegistryBuilder.buildServiceRegistry());
-		logger.info("UserDao created");
+	@Autowired 
+	SessionFactory sessionFactory;  
+	
+	protected Session getCurrentSession(){
+		return sessionFactory.getCurrentSession();
 	}
 	
-	private Session openSession() {  
-		return sessionFactory.getCurrentSession();  
-	}  
+	private long save(User user) {
+		Session session = getCurrentSession();
+		session.save(user);
+		return user.getId();
+	}
+	
+	private long update(User user) {
+		Session session = getCurrentSession();
+		session.update(user);
+		return user.getId();
+	}
+	
+	private long merge(User user) {
+		Session session = getCurrentSession();
+		session.merge(user);
+		return user.getId();
+	}
+	
+	@Override
+	public long persist(User user) {
 
-	@SuppressWarnings("unchecked")
-	public User getUser(String login) {  
-		logger.info("Get user " + login);
-		
+		User existing = getUser(user.getLogin());
+		if(existing != null){
+			return merge(user);
+		}else{
+			return save(user);
+		}
+	}
+	
+	@Override
+	public void delete(User user) {
+		Session session = getCurrentSession();
+		session.delete(user);
+	}
+	
+	@Override
+	public User getUser(String login) { 
 		List<User> userList = new ArrayList<User>();  
-		Session session = openSession();
-		session.beginTransaction();
+		Session session = getCurrentSession();
 		
 		try{
 			String hql = "FROM User U WHERE U.login = :login";
@@ -64,13 +74,11 @@ public class UserDaoImpl implements UserDao {
 			logger.info(e.getMessage());
 		}
 		
-		session.getTransaction().commit();
-		
 		if (userList.size() > 0){
-			logger.info("User " + login + " found");
+			//logger.info("User " + login + " found");
 			return userList.get(0);  
 		}else{
-			logger.info("No user " + login + " found");
+			//logger.info("No user " + login + " found");
 			return null;
 		}
 	}

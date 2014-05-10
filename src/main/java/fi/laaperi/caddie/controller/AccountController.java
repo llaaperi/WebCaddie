@@ -1,5 +1,7 @@
 package fi.laaperi.caddie.controller;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fi.laaperi.caddie.domain.Course;
+import fi.laaperi.caddie.domain.Role;
 import fi.laaperi.caddie.domain.User;
+import fi.laaperi.caddie.service.BCryptPasswordEncoder;
 import fi.laaperi.caddie.service.UserService;
 
 @Controller 
@@ -36,9 +41,9 @@ public class AccountController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/user-register", method=RequestMethod.GET)
+	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public ModelAndView registerForm() {
-		logger.info("user-register");
+		logger.info("register");
 		
 		User newUser = new User();
 		newUser.setLogin("new User");
@@ -46,11 +51,19 @@ public class AccountController {
 		return new ModelAndView("register", "user", newUser);
 	}
 	
-	@RequestMapping(value="/user-save", method=RequestMethod.POST)
-	public ModelAndView registerUser(@ModelAttribute("user")User user, ModelMap model) {
-		logger.info("Register user " + user.getLogin());
+	@RequestMapping(value="/registerUser", method=RequestMethod.POST)
+	public ModelAndView registerUser(Principal principal,
+									@RequestParam("login")String login, 
+									@RequestParam("password")String password) {
 		
-		userService.saveUser(user);
+		logger.info("Register user: " + login + ", " + password);
+		
+		User newUser = new User();
+		newUser.setLogin(login);
+		newUser.setPassword(new BCryptPasswordEncoder().encode(password));
+		
+		
+		userService.registerUser(newUser, Role.ROLE_USER);
 		return new ModelAndView("home");
 	}
 	

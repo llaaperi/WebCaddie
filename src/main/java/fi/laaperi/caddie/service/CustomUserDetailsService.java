@@ -16,18 +16,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fi.laaperi.caddie.controller.HomeController;
 import fi.laaperi.caddie.repository.UserDao;
-import fi.laaperi.caddie.repository.UserDaoImpl;
 
 @Service("customUserDetailsService")
-@Transactional(readOnly=true)
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
 	
 	@Autowired
-    private UserDao userDao;
+    UserDao userDao;
 	
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -37,8 +35,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			logger.info("UserDao is null");
 		}
 		
-		fi.laaperi.caddie.domain.User domainUser = userDao.getUser(login);  
-        
+		fi.laaperi.caddie.domain.User domainUser = userDao.getUser(login);
+		
 		if(domainUser == null){
 			logger.info("Not found");
 		}

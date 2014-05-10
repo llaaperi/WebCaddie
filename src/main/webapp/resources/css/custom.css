@@ -1,0 +1,68 @@
+/* Bootstrap padding for navbar and fixed footer on the bottom of the page */
+html, body {
+  height: 100%;
+}
+
+body{
+	padding-top:50px;
+	/*background-color:#f9f9f5 !important;*/
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:150px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -100px; /* negative value of footer height */
+  height: 100px;
+  clear:both;
+  padding-top:20px;
+} 
+
+/*Login page formatting*/
+.login{
+	width:270px;
+	height:150px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-75px 0 0 -135px;
+}
+
+/*Following are for DataTables bootstrap support*/
+/*
+div.dataTables_length label {
+    width: 200px;
+    float: left;
+    text-align: left;
+}
+ 
+div.dataTables_length select {
+    width: 75px;
+}
+ 
+div.dataTables_filter label {
+    float: right;
+    width: 300px;
+}
+ 
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+ 
+table {
+    margin: 1em 0;
+    clear: both;
+}
+*/

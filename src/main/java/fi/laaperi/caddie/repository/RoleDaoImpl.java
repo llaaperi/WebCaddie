@@ -12,8 +12,8 @@ import fi.laaperi.caddie.domain.Role;
 @Scope(value="singleton")
 public class RoleDaoImpl implements RoleDao {
 	
-	//@Autowired 
-	private SessionFactory sessionFactory;  
+	@Autowired 
+	SessionFactory sessionFactory;  
 
 	private Session getCurrentSession() {  
 		return sessionFactory.getCurrentSession();  
